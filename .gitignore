@@ -2,3 +2,6 @@
 .playwright-cli/
 *.codexskin.tmp
 *.codexskin.original.bak
+output/playwright/doraemon-heading-before.png
+output/playwright/doraemon-heading-left-v1.png
+output/playwright/doraemon-heading-left-v2.png

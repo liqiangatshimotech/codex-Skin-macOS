@@ -274,6 +274,38 @@ html.codexskin-doraemon main.main-surface.codexskin-home-shell::before {
   pointer-events: none;
 }
 
+html.codexskin-doraemon [data-codexskin-heading-placement="true"] {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  width: min(560px, calc(100vw - 360px)) !important;
+  max-width: 560px !important;
+  color: var(--cs-ink) !important;
+  font-size: 30px !important;
+  line-height: 1.35 !important;
+  font-weight: 740 !important;
+  text-align: left !important;
+  letter-spacing: 0 !important;
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.9) !important;
+  transform: translate3d(
+    var(--codexskin-heading-shift-x, 0),
+    var(--codexskin-heading-shift-y, 0),
+    0
+  ) !important;
+  transform-origin: left top !important;
+}
+
+html.codexskin-doraemon [data-codexskin-heading-placement="true"] button {
+  margin: 0 5px;
+  padding: 3px 9px 4px;
+  border: 1px solid rgba(11, 143, 211, 0.28) !important;
+  border-radius: 7px !important;
+  background: rgba(255, 255, 255, 0.84) !important;
+  color: var(--cs-blue-900) !important;
+  text-underline-offset: 4px;
+  box-shadow: 0 4px 12px rgba(24, 68, 91, 0.08) !important;
+}
+
 html.codexskin-doraemon .codexskin-home {
   --thread-content-max-width: min(980px, calc(100% - 44px)) !important;
 }
@@ -570,6 +602,11 @@ html.codexskin-doraemon hr {
   html.codexskin-doraemon main.main-surface.codexskin-home-shell::before {
     height: 236px;
     background-position: center, 58% center;
+  }
+
+  html.codexskin-doraemon [data-codexskin-heading-placement="true"] {
+    width: min(460px, calc(100vw - 330px)) !important;
+    font-size: 24px !important;
   }
 
   html.codexskin-doraemon [data-codexskin-heading="true"] {

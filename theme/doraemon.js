@@ -104,6 +104,46 @@
     return best;
   }
 
+  function placeHeading(home, main) {
+    const heading = findHeading(home);
+    const mainRect = main?.getBoundingClientRect();
+    const canPlace = Boolean(heading && mainRect && mainRect.width >= 760);
+
+    for (const old of document.querySelectorAll('[data-codexskin-heading-placement="true"]')) {
+      if (old !== heading || !canPlace) {
+        old.removeAttribute("data-codexskin-heading-placement");
+        old.style.removeProperty("--codexskin-heading-shift-x");
+        old.style.removeProperty("--codexskin-heading-shift-y");
+      }
+    }
+
+    if (!canPlace) return null;
+
+    heading.dataset.codexskinHeadingPlacement = "true";
+    const headingRect = heading.getBoundingClientRect();
+    const currentShiftX = Number.parseFloat(
+      heading.style.getPropertyValue("--codexskin-heading-shift-x"),
+    ) || 0;
+    const currentShiftY = Number.parseFloat(
+      heading.style.getPropertyValue("--codexskin-heading-shift-y"),
+    ) || 0;
+    const baseLeft = headingRect.left - currentShiftX;
+    const baseTop = headingRect.top - currentShiftY;
+    const sideInset = Math.max(38, Math.min(64, mainRect.width * 0.055));
+    const desiredLeft = mainRect.left + sideInset;
+    const desiredTop = mainRect.top + (mainRect.width < 900 ? 104 : 116);
+
+    heading.style.setProperty(
+      "--codexskin-heading-shift-x",
+      `${Math.round(desiredLeft - baseLeft)}px`,
+    );
+    heading.style.setProperty(
+      "--codexskin-heading-shift-y",
+      `${Math.round(desiredTop - baseTop)}px`,
+    );
+    return heading;
+  }
+
   function markCards(home) {
     for (const el of document.querySelectorAll('[data-codexskin-home-card="true"]')) {
       el.removeAttribute("data-codexskin-home-card");
@@ -216,8 +256,8 @@
     }
     if (main) main.classList.toggle("codexskin-home-shell", Boolean(home));
 
-    const heading = null;
-    clearMarker("codexskin-heading", heading);
+    const heading = placeHeading(home, main);
+    clearMarker("codexskin-heading", null);
 
     const hero = null;
     clearMarker("codexskin-hero", hero);
