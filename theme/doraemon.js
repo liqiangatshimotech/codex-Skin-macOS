@@ -262,7 +262,7 @@
     const hero = null;
     clearMarker("codexskin-hero", hero);
 
-    markCards(null);
+    markCards(home);
 
     const composer = findComposer();
     clearMarker("codexskin-composer", composer);

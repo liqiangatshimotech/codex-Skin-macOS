@@ -17,6 +17,7 @@
   --cs-line-strong: rgba(11, 143, 211, 0.3);
   --cs-shadow: rgba(24, 68, 91, 0.1);
   --cs-hero-art: url("./assets/doraemon-hero-v2.png");
+  --cs-home-hero-height: min(540px, max(320px, calc(100vh - 300px)));
   --gray-0: #ffffff !important;
   --gray-50: #f8fbfc !important;
   --gray-75: #f2f8fa !important;
@@ -264,7 +265,7 @@ html.codexskin-doraemon main.main-surface.codexskin-home-shell::before {
   left: 16px;
   right: 16px;
   z-index: -1;
-  height: min(540px, max(320px, calc(100vh - 300px)));
+  height: var(--cs-home-hero-height);
   border: 1px solid rgba(11, 143, 211, 0.26);
   border-radius: 14px;
   background:
@@ -272,6 +273,24 @@ html.codexskin-doraemon main.main-surface.codexskin-home-shell::before {
     var(--cs-hero-art) center / cover no-repeat;
   box-shadow: 0 14px 34px rgba(24, 68, 91, 0.1), inset 0 1px rgba(255, 255, 255, 0.8);
   pointer-events: none;
+}
+
+html.codexskin-doraemon main.main-surface.codexskin-home-shell::after {
+  content: "";
+  position: absolute;
+  top: calc(15px + var(--cs-home-hero-height));
+  right: 16px;
+  bottom: 150px;
+  left: 16px;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(180deg, rgba(210, 240, 251, 0.58), rgba(237, 248, 252, 0.24) 58%, rgba(255, 255, 255, 0)),
+    linear-gradient(rgba(11, 143, 211, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 143, 211, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, transparent 0 18%, rgba(244, 197, 66, 0.11) 18% 18.3%, transparent 18.3% 81.7%, rgba(231, 71, 77, 0.09) 81.7% 82%, transparent 82%);
+  background-size: auto, 44px 44px, 44px 44px, 100% 100%;
+  mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.72) 52%, transparent 100%);
 }
 
 html.codexskin-doraemon [data-codexskin-heading-placement="true"] {
@@ -375,7 +394,7 @@ html.codexskin-doraemon .codexskin-home .group\/home-suggestions {
 html.codexskin-doraemon .codexskin-home .group\/home-suggestions button,
 html.codexskin-doraemon [data-codexskin-home-card="true"] {
   position: relative !important;
-  min-height: 134px !important;
+  min-height: 176px !important;
   padding: 16px 13px 14px !important;
   overflow: hidden !important;
   align-items: stretch !important;
@@ -418,6 +437,49 @@ html.codexskin-doraemon [data-codexskin-home-card="true"]:hover {
   border-color: rgba(11, 143, 211, 0.34) !important;
   box-shadow: 0 12px 26px rgba(24, 68, 91, 0.11) !important;
   transform: translateY(-2px) !important;
+}
+
+html.codexskin-doraemon [data-codexskin-home-card="true"] {
+  gap: 14px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+html.codexskin-doraemon [data-codexskin-home-card="true"] > span:first-child {
+  justify-content: center !important;
+}
+
+html.codexskin-doraemon [data-codexskin-home-card="true"] > span:last-child {
+  align-items: center !important;
+  text-align: center !important;
+}
+
+html.codexskin-doraemon [data-codexskin-home-card="true"] > span:first-child > span:first-child {
+  display: grid !important;
+  width: 42px !important;
+  height: 42px !important;
+  margin: 0 auto;
+  place-items: center;
+  border-radius: 50% !important;
+  color: #ffffff !important;
+  background: linear-gradient(145deg, #35b8e8, var(--cs-blue-700)) !important;
+  box-shadow: 0 0 0 6px rgba(25, 168, 229, 0.08), 0 5px 13px rgba(24, 68, 91, 0.12) !important;
+}
+
+html.codexskin-doraemon [data-codexskin-home-card="true"]:nth-child(2) > span:first-child > span:first-child {
+  color: #684d00 !important;
+  background: linear-gradient(145deg, #ffe174, var(--cs-yellow)) !important;
+}
+
+html.codexskin-doraemon [data-codexskin-home-card="true"]:nth-child(3) > span:first-child > span:first-child {
+  color: #ffffff !important;
+  background: linear-gradient(145deg, #f06c70, var(--cs-red)) !important;
+}
+
+html.codexskin-doraemon [data-codexskin-home-card="true"] svg {
+  width: 20px !important;
+  height: 20px !important;
+  color: currentColor !important;
 }
 
 html.codexskin-doraemon .codexskin-home .group\/home-suggestions button > span:first-child > span:first-child {
@@ -591,6 +653,10 @@ html.codexskin-doraemon hr {
 }
 
 @media (max-width: 900px) {
+  :root.codexskin-doraemon {
+    --cs-home-hero-height: 236px;
+  }
+
   .codexskin-status {
     display: none !important;
   }
@@ -631,6 +697,10 @@ html.codexskin-doraemon hr {
 }
 
 @media (max-width: 760px) {
+  :root.codexskin-doraemon {
+    --cs-home-hero-height: 210px;
+  }
+
   .codexskin-brand {
     display: none !important;
   }
