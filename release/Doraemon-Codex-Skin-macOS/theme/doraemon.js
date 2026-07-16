@@ -145,16 +145,20 @@
   }
 
   function markCards(home) {
+    const marked = [];
     for (const el of document.querySelectorAll('[data-codexskin-home-card="true"]')) {
       el.removeAttribute("data-codexskin-home-card");
     }
-    if (!home) return;
+    if (!home) return marked;
 
     const group = home.querySelector(".group\\/home-suggestions");
     const stableButtons = group ? [...group.querySelectorAll(":scope > button")] : [];
     if (stableButtons.length) {
-      for (const button of stableButtons) button.dataset.codexskinHomeCard = "true";
-      return;
+      for (const button of stableButtons) {
+        button.dataset.codexskinHomeCard = "true";
+        marked.push(button);
+      }
+      return marked;
     }
 
     const labels = /(探索并理解代码|构建新功能|审查代码|修复问题|Explore and understand|Build new|Review code|Fix bugs)/;
@@ -163,8 +167,10 @@
       const rect = el.getBoundingClientRect();
       if (labels.test(text) && rect.width >= 110 && rect.height >= 50 && rect.height <= 180) {
         el.dataset.codexskinHomeCard = "true";
+        marked.push(el);
       }
     }
+    return marked;
   }
 
   function findComposer() {
@@ -188,6 +194,60 @@
       }
     }
     return best;
+  }
+
+  function findComposerDock(home, composer) {
+    if (!home || !composer) return null;
+    const composerRect = composer.getBoundingClientRect();
+    let node = composer;
+    for (let depth = 0; node && home.contains(node) && depth < 9; depth += 1, node = node.parentElement) {
+      const hasProjectSelector = node.classList?.contains("group/project-selector") ||
+        node.getElementsByClassName?.("group/project-selector").length > 0;
+      const rect = node.getBoundingClientRect();
+      if (
+        hasProjectSelector &&
+        rect.width >= composerRect.width * 0.82 &&
+        rect.height >= composerRect.height &&
+        rect.height <= 420
+      ) {
+        return node;
+      }
+    }
+    return null;
+  }
+
+  function placeComposerDock(home, composer, cards) {
+    const dock = findComposerDock(home, composer);
+    const visibleCards = cards.filter((card) => {
+      const rect = card.getBoundingClientRect();
+      return rect.width > 80 && rect.height > 40;
+    });
+    const canPlace = Boolean(dock && visibleCards.length >= 3 && window.innerHeight >= 900);
+
+    for (const old of document.querySelectorAll('[data-codexskin-composer-dock="true"]')) {
+      if (old !== dock || !canPlace) {
+        old.removeAttribute("data-codexskin-composer-dock");
+        old.style.removeProperty("--codexskin-dock-shift-y");
+        old.style.removeProperty("--codexskin-dock-fill");
+      }
+    }
+
+    if (!canPlace) return null;
+
+    dock.dataset.codexskinComposerDock = "true";
+    const fill = Math.min(140, Math.max(48, window.innerHeight - 900));
+    dock.style.setProperty("--codexskin-dock-fill", `${Math.round(fill)}px`);
+
+    const dockRect = dock.getBoundingClientRect();
+    const currentShiftY = Number.parseFloat(
+      dock.style.getPropertyValue("--codexskin-dock-shift-y"),
+    ) || 0;
+    const baseTop = dockRect.top - currentShiftY;
+    const cardBottom = Math.max(...visibleCards.map((card) => card.getBoundingClientRect().bottom));
+    const targetTop = cardBottom + 18;
+    const shiftY = Math.max(-240, Math.min(0, targetTop - baseTop));
+    dock.style.setProperty("--codexskin-dock-shift-y", `${Math.round(shiftY)}px`);
+    return dock;
   }
 
   function markSendButton(composer) {
@@ -262,11 +322,12 @@
     const hero = null;
     clearMarker("codexskin-hero", hero);
 
-    markCards(home);
+    const cards = markCards(home);
 
     const composer = findComposer();
     clearMarker("codexskin-composer", composer);
     if (composer) composer.dataset.codexskinComposer = "true";
+    placeComposerDock(home, composer, cards);
     markSendButton(composer);
     ensureChrome(main, home);
   }

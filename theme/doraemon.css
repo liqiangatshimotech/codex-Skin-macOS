@@ -529,6 +529,18 @@ html.codexskin-doraemon [data-codexskin-composer="true"] {
   overflow: visible !important;
 }
 
+html.codexskin-doraemon [data-codexskin-composer-dock="true"] {
+  position: relative !important;
+  z-index: 4 !important;
+  transform: translate3d(0, var(--codexskin-dock-shift-y, 0), 0) !important;
+  transform-origin: center top !important;
+}
+
+html.codexskin-doraemon [data-codexskin-composer-dock="true"] .composer-surface-chrome,
+html.codexskin-doraemon .composer-surface-chrome[data-codexskin-composer-dock="true"] {
+  min-height: calc(102px + var(--codexskin-dock-fill, 0px)) !important;
+}
+
 html.codexskin-doraemon .composer-surface-chrome:focus-within,
 html.codexskin-doraemon [data-codexskin-composer="true"]:focus-within {
   border-color: rgba(11, 143, 211, 0.48) !important;
