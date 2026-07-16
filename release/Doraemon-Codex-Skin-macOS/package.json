@@ -1,0 +1,12 @@
+{
+  "name": "doraemon-codex-skin-macos",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "install:skin": "node scripts/asar-patcher.mjs install",
+    "uninstall:skin": "node scripts/asar-patcher.mjs uninstall",
+    "status": "node scripts/asar-patcher.mjs status",
+    "validate": "node scripts/asar-patcher.mjs validate"
+  }
+}

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN" class="codexskin-doraemon">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Codexskin Doraemon Preview</title>
+    <link id="codexskin-doraemon-css" rel="stylesheet" href="../theme/doraemon.css" />
+    <script defer src="../theme/doraemon.js"></script>
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; min-height: 100vh; font: 14px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", sans-serif; }
+      .app { display: grid; grid-template-columns: 274px 1fr; min-height: 100vh; }
+      .sidebar { padding: 52px 16px 14px; }
+      .brand { margin-bottom: 20px; font-size: 18px; font-weight: 700; }
+      .nav-item { display: flex; width: 100%; align-items: center; gap: 10px; min-height: 32px; padding: 7px 8px; margin-bottom: 3px; border: 0; background: transparent; text-align: left; }
+      .section-title { margin: 26px 0 8px; font-weight: 600; opacity: 0.58; }
+      .user { position: absolute; left: 16px; bottom: 16px; display: flex; align-items: center; gap: 10px; }
+      .avatar { display: grid; width: 20px; height: 20px; place-items: center; border-radius: 50%; background: #e7474d; color: white; font-size: 11px; }
+      .main-surface { position: relative; min-width: 0; }
+      .app-header-tint { height: 46px; }
+      .home { position: absolute; inset: 46px 0 0; display: block; padding-top: 0; }
+      .home-root { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+      .home-stage { position: relative; width: 100%; min-height: fit-content; flex: 1 1 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 96px; }
+      .hero { position: relative; width: min(980px, calc(100% - 44px)); display: flex; justify-content: center; }
+      .hero-copy { display: flex; }
+      .hero-copy-inner { display: flex; flex-direction: column; }
+      h1 { margin: 0; }
+      .suggestions-wrap { position: absolute; left: 14px; right: 14px; top: 100%; margin-top: 32px; }
+      .cards { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+      .card { display: flex; flex-direction: column; gap: 12px; border: 0; }
+      .card > span:first-child { display: flex; }
+      .card > span:last-child { display: flex; }
+      .home-footer { width: 100%; min-height: 0; flex: 1 1 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 134px 28px; }
+      .fast-banner { width: 100%; margin-bottom: 12px; padding: 12px 16px; border: 1px solid rgba(31, 110, 147, 0.13); border-radius: 9px; background: rgba(255, 255, 255, 0.92); }
+      .composer { position: relative; width: 100%; min-height: 102px; padding: 18px 12px 12px; }
+      .composer .input { color: rgba(69, 90, 112, 0.58); }
+      .composer-row { position: absolute; left: 12px; right: 12px; bottom: 10px; display: flex; justify-content: space-between; }
+      .round-btn { width: 29px; height: 29px; border: 0; border-radius: 50%; }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar app-shell-left-panel">
+        <div class="brand">Codex</div>
+        <button class="nav-item">新建任务</button>
+        <button class="nav-item">已安排</button>
+        <button class="nav-item">插件</button>
+        <button class="nav-item">站点</button>
+        <button class="nav-item">拉取请求</button>
+        <button class="nav-item">聊天</button>
+        <div class="section-title">项目</div>
+        <button class="nav-item" aria-current="page">教学平台</button>
+        <button class="nav-item">aitrader</button>
+        <button class="nav-item">other</button>
+        <div class="user"><span class="avatar">L</span><strong>李强</strong></div>
+      </aside>
+      <main class="main-surface">
+        <header class="app-header-tint"></header>
+        <section class="home" role="main">
+          <div class="home-root">
+            <div class="home-stage">
+              <div class="hero">
+                <div class="hero-copy">
+                  <div class="hero-copy-inner">
+                    <h1 data-feature="game-source">我们应该在 <button>教学平台</button> 中构建什么?</h1>
+                  </div>
+                </div>
+                <div class="suggestions-wrap top-full composer-suggestion-inline-inset">
+                  <div class="cards group/home-suggestions">
+                    <button class="card"><span><span>⌘</span></span><span>探索并理解代码</span></button>
+                    <button class="card"><span><span>＋</span></span><span>构建新功能、应用或工具</span></button>
+                    <button class="card"><span><span>✓</span></span><span>审查代码并提出修改建议</span></button>
+                    <button class="card"><span><span>×</span></span><span>修复问题和失败</span></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="home-footer">
+              <div class="fast-banner">启用快速模式</div>
+              <div class="composer composer-surface-chrome">
+                <div class="input" role="textbox">随心输入</div>
+                <div class="composer-row">
+                  <button class="round-btn">+</button>
+                  <button class="round-btn bg-token-foreground">↑</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
