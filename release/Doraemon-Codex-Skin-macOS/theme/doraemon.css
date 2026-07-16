@@ -264,7 +264,7 @@ html.codexskin-doraemon main.main-surface.codexskin-home-shell::before {
   left: 16px;
   right: 16px;
   z-index: -1;
-  height: 300px;
+  height: min(540px, max(320px, calc(100vh - 300px)));
   border: 1px solid rgba(11, 143, 211, 0.26);
   border-radius: 14px;
   background:

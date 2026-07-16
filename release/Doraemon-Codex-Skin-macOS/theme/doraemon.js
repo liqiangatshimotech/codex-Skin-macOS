@@ -107,7 +107,7 @@
   function placeHeading(home, main) {
     const heading = findHeading(home);
     const mainRect = main?.getBoundingClientRect();
-    const canPlace = Boolean(heading && mainRect && mainRect.width >= 760);
+    const canPlace = Boolean(heading && mainRect && mainRect.width >= 700);
 
     for (const old of document.querySelectorAll('[data-codexskin-heading-placement="true"]')) {
       if (old !== heading || !canPlace) {
